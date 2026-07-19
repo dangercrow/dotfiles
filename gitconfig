@@ -1,0 +1,36 @@
+[user]
+	email = dangercrow@gmail.com
+	name = dangercrow
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true
+[alias]
+	# List all aliases
+	aliases = "!f() { git config --get-regexp '^alias\\.' | sed 's/^alias\\.//;s/ / = /'; }; f"
+	## Common aliases
+	br = branch -vv
+	ci = commit
+	co = checkout
+	cp = cherry-pick
+	st = status
+	## Uncommon aliases
+	# amend a commit in place by slapping in your local changes. Supports additional arguments, e.g. amend -m "New message"
+	amend = commit -a --amend --no-edit
+	# Removes dangling branches. Go on now, git! git gone!
+	gone = "!f() { git fetch origin --prune && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs -r git branch -d; }; f"
+	## Rare aliases
+	# This is to do with how I work. I am happy working in a detached HEAD, and hate accidentally committing on default branch and then getting rejected upstream
+	# More generally, I actually am not a fan of local branches at all, and prefer to work in a detached HEAD state and push to a new branch when I want to share my work
+	# The reflog keeps recent history, and if it is important work, it should be pushed.
+	# This alias will checkout the upstream HEAD of the current branch, so you can work in a detached HEAD state without fear of accidentally committing to the default branch
+	# You can then push your changes to a new branch with `git push origin HEAD:new-branch-name`
+	om = "!f() { git fetch origin && git checkout origin/HEAD; }; f"
+	# Corresponding with `om`, once you're in a detached HEAD you might want an easy way to throw it onto a branch
+	# This does the refspec juggling you need to make that easy
+	pb = "!f() { git push origin HEAD:refs/heads/$1; }; f"
+	pbf = "!f() { git push origin HEAD:refs/heads/$1 --force-with-lease; }; f"  # Sometimes you must insist (with lease, to ensure you are actually up to date with the remote)
+	# Sometimes I have an old upstream, and I want to bring it up to date without checking out all the files and then moving everything forwards and rebasing
+	# We can use an appropriate chain of commands and rebase refspecs to do this, but I always forget it, so just alias it
+	# This does actually leave you with the branch dangling locally, which is a touch anti-ethos, but I cannae be bothered to fix it
+	frb = "!f() { git fetch && git fetch . origin/$1 && git rebase -i origin/HEAD origin/$1; }; f"
