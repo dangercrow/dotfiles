@@ -30,3 +30,14 @@ export PATH
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export LD_LIBRARY_PATH
 # END CUDA setup
+
+# BEGIN aliases
+alias d='docker'
+alias dc='docker compose'  # /usr/bin/dc if you really need GNU dc
+alias g='git'
+alias k='kubectl'
+alias ll='ls -alF'
+alias screen='screen -U'
+alias scp='scp -C -p'
+alias tf='terraform'
+# END aliases

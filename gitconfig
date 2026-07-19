@@ -1,10 +1,17 @@
 [user]
 	email = dangercrow@gmail.com
 	name = dangercrow
+[core]
+	editor = nano  # If you need more than nano, you should probbably be using a real IDE
 [init]
 	defaultBranch = main
 [fetch]
 	prune = true
+	
+[advice]
+	statusHints = false  # I know what I'm doing (mostly)
+	detachedHead = false  # This isn't a phase, mum
+
 [alias]
 	# List all aliases
 	aliases = "!f() { git config --get-regexp '^alias\\.' | sed 's/^alias\\.//;s/ / = /'; }; f"
