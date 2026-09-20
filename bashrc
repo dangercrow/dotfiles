@@ -41,3 +41,7 @@ alias screen='screen -U'
 alias scp='scp -C -p'
 alias tf='terraform'
 # END aliases
+
+if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
