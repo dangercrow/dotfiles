@@ -45,3 +45,8 @@ alias tf='terraform'
 if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 fi
+
+### bling.sh source start
+export ATUIN_NOBIND="true"
+test -f /usr/share/bazzite-cli/bling.sh && source /usr/share/bazzite-cli/bling.sh
+### bling.sh source end
