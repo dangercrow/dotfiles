@@ -4,7 +4,13 @@
     ~/.bash_profile: bash_profile
     ~/.bashrc: bashrc
     ~/.bash_logout: bash_logout
-    ~/.gitconfig: gitconfig
+    ~/.config/git/config:
+      path: gitconfig
+      create: true
     ~/.local/bin/freeze: bin/freeze
 
-
+# ~/.gitconfig is machine-local and untracked: git reads it after ~/.config/git/config,
+# and `git config --global` (e.g. `gh auth setup-git`) writes to it when it exists.
+- shell:
+    - description: Create machine-local ~/.gitconfig
+      command: '[ -L ~/.gitconfig ] && rm ~/.gitconfig; [ -e ~/.gitconfig ] || touch ~/.gitconfig'
